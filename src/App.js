@@ -26,7 +26,7 @@ const App = () => {
     }
 
     // Apply filters
-    let filteredResults = flights;
+    let filteredResults = [...flights];
 
     if (filters.source) {
       const sourceCity = filters.source.toLowerCase();
@@ -36,7 +36,7 @@ const App = () => {
           sourceCity
       );
     }
-    console.log(filteredResults);
+   
     if (filters.destination) {
       const destinationCity = filters.destination.toLowerCase();
       filteredResults = filteredResults.filter(
@@ -45,12 +45,26 @@ const App = () => {
           destinationCity
       );
     }
-    console.log(filteredResults);
+    
     // Apply sorting
     if (filters.sortBy === "price") {
       filteredResults.sort((a, b) => a.fare - b.fare);
     }
+    if (filters.sortBy === "select") {
+      console.log("in select")
+      console.log(flights)
+      filteredResults = [...flights];
+    }
 
+    if (filters.selectedAirlines && filters.selectedAirlines !== "select") {
+      filteredResults = filteredResults.filter((flight) =>
+        filters.selectedAirlines ===
+        flight.displayData.airlines[0].airlineName
+      );
+    }
+  
+  
+    console.log(filteredResults);
     setFilteredFlights([...filteredResults]);
   };
 

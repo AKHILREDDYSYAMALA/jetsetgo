@@ -16,7 +16,7 @@ const FlightCard = ({ flight }) => {
           <div className="mr-2">
             <img
               src={
-                flight.displayData.airlines[0].airlineName == "JetSpice"
+                flight.displayData.airlines[0].airlineName === "JetSpice"
                   ? "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/SG.png?v=18"
                   : "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/AI.png?v=18"
               }
@@ -24,8 +24,8 @@ const FlightCard = ({ flight }) => {
               className="w-12 h-12"
             />
           </div>
-          <div className="mr-6">
-            <h3 className="text-lg font-semibold">
+          <div className="mr-6 pr-2 w-32">
+            <h3 className="text-lg font-semibold ">
               {flight.displayData.airlines[0].airlineName}
             </h3>
             <p>
@@ -34,19 +34,19 @@ const FlightCard = ({ flight }) => {
                 .join(", ")}
             </p>
           </div>
-          <div className="mr-6">
+          <div className="mr-6 w-28">
             <p>{formatDate(flight.displayData.source.depTime)}</p>
             <p className="text-sm font-bold">
               {flight.displayData.source.airport.cityName}
             </p>
           </div>
-          <div className="mr-6">
+          <div className="mr-6 w-28">
             <p className="text-xs">
               Journey Time: {flight.displayData.totalDuration}
             </p>
             <p className="text-xs">Stops: {flight.displayData.stopInfo}</p>
           </div>
-          <div className="mr-6">
+          <div className="mr-6 w-28">
             <p>{formatDate(flight.displayData.destination.arrTime)}</p>
             <p className="text-sm font-bold">
               {flight.displayData.destination.airport.cityName}
