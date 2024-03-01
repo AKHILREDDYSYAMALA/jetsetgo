@@ -8,11 +8,12 @@ const App = () => {
 
   useEffect(() => {
     // Fetch flights from the API
-    fetch("https://api.npoint.io/4829d4ab0e96bfab50e7")
+    fetch("https://api.npoint.io/378e02e8e732bb1ac55b")
       .then((response) => response.json())
       .then((data) => {
-        setFlights(data.data.result);
-        setFilteredFlights(data.data.result);
+        console.log(data);
+        setFlights(data);
+        setFilteredFlights(data);
       })
       .catch((error) => console.error("Error fetching flights:", error));
   }, []);
@@ -24,47 +25,42 @@ const App = () => {
     if (!flights) {
       return;
     }
-
-    // Apply filters
     let filteredResults = [...flights];
 
-    if (filters.source) {
-      const sourceCity = filters.source.toLowerCase();
+    if (filters.sortBy === "select") {
+      console.log("in select");
+      console.log(flights);
+      filteredResults = [...flights];
+    }
+    if (filters.selectedAirlines && filters.selectedAirlines !== "select") {
       filteredResults = filteredResults.filter(
-        (flight) =>
-          flight.displayData.source.airport.cityName.toLowerCase() ===
-          sourceCity
+        (flight) => filters.selectedAirlines === flight.airline
       );
     }
-   
+
+    // Apply filters
+
+    if (filters.source) {
+      console.log("in source");
+      const sourceCity = filters.source.toLowerCase();
+      filteredResults = filteredResults.filter(
+        (flight) => flight.origin.toLowerCase() === sourceCity
+      );
+    }
+    console.log(filteredResults);
     if (filters.destination) {
       const destinationCity = filters.destination.toLowerCase();
       filteredResults = filteredResults.filter(
-        (flight) =>
-          flight.displayData.destination.airport.cityName.toLowerCase() ===
-          destinationCity
+        (flight) => flight.destination.toLowerCase() === destinationCity
       );
-    }
-    
-    // Apply sorting
-    if (filters.sortBy === "price") {
-      filteredResults.sort((a, b) => a.fare - b.fare);
-    }
-    if (filters.sortBy === "select") {
-      console.log("in select")
-      console.log(flights)
-      filteredResults = [...flights];
     }
 
-    if (filters.selectedAirlines && filters.selectedAirlines !== "select") {
-      filteredResults = filteredResults.filter((flight) =>
-        filters.selectedAirlines ===
-        flight.displayData.airlines[0].airlineName
-      );
+    // Apply sorting
+    if (filters.sortBy === "price") {
+      filteredResults.sort((a, b) => a.price - b.price);
     }
-  
-  
-    console.log(filteredResults);
+
+    //console.log(filteredResults);
     setFilteredFlights([...filteredResults]);
   };
 
