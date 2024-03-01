@@ -48,7 +48,7 @@ const FlightCard = ({ flight }) => {
   };
 
   return (
-    <div className="w-90 mx-auto bg-white shadow-md rounded-md mb-8 p-6">
+    <div className="w-90 mx-auto bg-white shadow-md rounded-md my-8 p-4 sm:p-6 lg:p-8">
       <div className="flex justify-between items-center">
         <div className="flex items-center">
           <div className="mr-2">

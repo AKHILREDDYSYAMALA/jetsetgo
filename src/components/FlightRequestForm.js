@@ -10,17 +10,21 @@ const FilterModal = ({ isOpen, onClose, onApply }) => {
   };
 
   return (
-    <div className={`modal ${isOpen ? "block" : "hidden"}`}>
-      <div className="modal-content bg-white p-4 rounded-md mt-10 flex justify-center w-full fixed op-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-        <label className="m-2 text-lg font-bold">Filter by Airlines :</label>
+    <div className={`modal ${isOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
+<div className="modal-content bg-white p-4 rounded-md mt-6 flex justify-center w-full opacity-1/2 left-1/2">       
+ <label className="m-2 text-lg font-bold">Filter by Airlines :</label>
         <select
           value={selectedAirlines}
           onChange={(e) => setSelectedAirlines(e.target.value)}
-          className="m-1 w-40 h-10 mr-6 p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+          className="m-1 w-40 h-10 mr-6 ml-100 p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
         >
           <option value="select">--select--</option>
-          <option value="JetSpice">JetSpice</option>
-          <option value="AirIndia">Air India</option>
+          <option value="SpiceJet">SpiceJet</option>
+          <option value="Air India">Air India</option>
+          <option value="IndiGo">IndiGo</option>
+          <option value="Vistara">Vistara</option>
+          <option value="Go Air">Go Air</option>
+          <option value="Air Asia">Air Asia</option>
           {/* Add more airline options if needed */}
         </select>
 
@@ -49,7 +53,7 @@ const FilterModal = ({ isOpen, onClose, onApply }) => {
   );
 };
 
-const FlightRequestForm = ({ onSearch }) => {
+const FlightRequestForm = ({ onSearch,isFilterModalOpen, setFilterModalOpen }) => {
   const [filters, setFilters] = useState({
     source: "",
     destination: "",
@@ -57,7 +61,7 @@ const FlightRequestForm = ({ onSearch }) => {
     selectedAirlines: "select",
   });
 
-  const [isFilterModalOpen, setFilterModalOpen] = useState(false);
+ 
 
   const handleFilterIconClick = () => {
     setFilterModalOpen(!isFilterModalOpen);
@@ -96,8 +100,8 @@ const FlightRequestForm = ({ onSearch }) => {
   };
 
   return (
-    <div className="text-center h-48 flex items-center justify-center">
-      <form onSubmit={handleSubmit}>
+    <div className="text-center h-16 flex items-center justify-center mt-24">
+      <form onSubmit={handleSubmit}  className="max-w-8xl mx-auto">
         {/* Input fields */}
         <div className="flex justify-center space-x-4 mb-4">
           <label className="text-lg font-bold">

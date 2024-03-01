@@ -5,6 +5,7 @@ import FlightResults from "./components/FlightResults";
 const App = () => {
   const [flights, setFlights] = useState([]);
   const [filteredFlights, setFilteredFlights] = useState([]);
+  const [isFilterModalOpen, setFilterModalOpen] = useState(false);
 
   useEffect(() => {
     // Fetch flights from the API
@@ -61,15 +62,17 @@ const App = () => {
     }
 
     //console.log(filteredResults);
-    setFilteredFlights([...filteredResults]);
+    setFilteredFlights((prevFilteredFlights) => [...filteredResults]);
+
   };
 
   return (
-    <div>
-      <h1>JetSetGo - Flight Booking App</h1>
-      <FlightRequestForm onSearch={handleSearch} />
-      <FlightResults flights={filteredFlights} />
-    </div>
+    <div className="mt-8 min-h-screen">
+    <h1 className="text-3xl font-bold mb-4 text-center">JetSetGo - Flight Booking App</h1>
+    <FlightRequestForm onSearch={handleSearch} isFilterModalOpen={isFilterModalOpen}
+    setFilterModalOpen={setFilterModalOpen} />
+    <FlightResults flights={filteredFlights} isFilterModalOpen={isFilterModalOpen} />
+  </div>
   );
 };
 
