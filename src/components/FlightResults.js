@@ -1,9 +1,13 @@
 import React from "react";
 import FlightCard from "./FlightCard";
 
-const FlightResults = ({ flights,isFilterModalOpen }) => {
+const FlightResults = ({ flights, isFilterModalOpen }) => {
   return (
-    <div className={`flex items-center justify-center min-h-screen ${isFilterModalOpen ? 'mt-10' : ''}`}>
+    <div
+      className={`flex items-center justify-center  ${
+        isFilterModalOpen ? "mt-10" : ""
+      }`}
+    >
       <div className="text-center">
         {/* <h2 className="text-2xl font-bold mb-4">Flight Results</h2> */}
         {flights.length > 0 ? (

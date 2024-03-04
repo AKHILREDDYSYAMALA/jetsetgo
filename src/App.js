@@ -63,16 +63,23 @@ const App = () => {
 
     //console.log(filteredResults);
     setFilteredFlights((prevFilteredFlights) => [...filteredResults]);
-
   };
 
   return (
     <div className="mt-8 min-h-screen">
-    <h1 className="text-3xl font-bold mb-4 text-center">JetSetGo - Flight Booking App</h1>
-    <FlightRequestForm onSearch={handleSearch} isFilterModalOpen={isFilterModalOpen}
-    setFilterModalOpen={setFilterModalOpen} />
-    <FlightResults flights={filteredFlights} isFilterModalOpen={isFilterModalOpen} />
-  </div>
+      <h1 className="text-3xl font-bold mb-4 text-center">
+        JetSetGo - Flight Booking App
+      </h1>
+      <FlightRequestForm
+        onSearch={handleSearch}
+        isFilterModalOpen={isFilterModalOpen}
+        setFilterModalOpen={setFilterModalOpen}
+      />
+      <FlightResults
+        flights={filteredFlights}
+        isFilterModalOpen={isFilterModalOpen}
+      />
+    </div>
   );
 };
 
